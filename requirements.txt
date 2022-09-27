@@ -1,0 +1,53 @@
+Library Management System
+
+1. A user, can borrow a book using their library card - ONLY ON BOOK AT A TIME
+2. Librarian will search and issue the book - Multiple Librarian, take care of Concurrency
+3. Each book is charged 1 RS per day, issued for only 7 days. and late fine is 2 Rs per Day
+4. User can only issue one book
+5. If the searched book is issued tell when we will return the book
+6. Search by book name
+7. Multiple Books of same name
+8. Pay 7 Rs when they take the book and then balance is calculated at the time of return
+9. Library Generates a Invoice
+Expand
+Multi Librarian - busy then get the next one
+Issue upto n books - n is unlimited
+
+Book
+    - name
+
+LibraryCard
+    - numbers
+
+Library
+    - []Books
+    - Search(BookName) (Book,error)
+    - AddBooks(Book...) error
+
+issuedBookStore - abstraction
+InMemoryIssueBookStore
+issueDetails - Implementation
+    - Date
+    - Book
+    -
+
+LibraryManagementSystem
+    - Librarian
+    - issuedBookStore
+    - paymentSystem
+    - invoiceGenerator
+    - BorrowBook(BookName, LibraryCard) (Book,error) -> add to store,
+    - Return(Book, LibraryCard) Invoice,error
+
+Librarian
+    - library
+    - Search(BookName) (Book,error) -> returns book, mark in library
+    - Return(Book) () -> takes, put in library
+
+paymentSystem
+    - compute(issuedDate) Money
+
+invoiceGenerator
+    - Generate(Book,IssuedDate,Money) Invoice
+
+Money
